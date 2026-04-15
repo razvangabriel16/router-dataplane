@@ -101,7 +101,7 @@ Mininet Topology used for testing
 
 </td>
 <td>
-<img src="test_topology.png" width="500"/>
+<img src="/assets/test_topology.png" width="500"/>
 </td>
 </tr>
 </table>
@@ -119,7 +119,7 @@ internals.
 
 <br>
 
-![First Scenario Full Overview](subiect1_1.png)
+![First Scenario Full Overview](/assets/subiect1_1.png)
 
 <br>
 
@@ -132,7 +132,7 @@ internals.
 0% packet loss means all 3 packets arrived and returned, confirmed by `3 packets transmitted, 3 received, 0% packet loss`
 <br>
 
-![First Scenario Detailed Packet Review](subiect1_2.png)
+![First Scenario Detailed Packet Review](/assets/subiect1_2.png)
 <br>
 
 **_Second Scenario_**: Ping from h0 (192.168.1.2) to h1 (192.168.0.2). The router must choose the correct route from the routing table. 
@@ -150,22 +150,22 @@ The trie is built only once at startup, before the processing loop.
 
 </td>
 <td>
-<img src="trie.png" width="2000"/>
+<img src="/assets/trie.png" width="2000"/>
 </td>
 </tr>
 </table>
 <br>
 
-![Second Scenario Overview](subiect2.png)
+![Second Scenario Overview](/assets/subiect2.png)
 <br>
 
 **_Third Scenario_**:
 - ICMP Time Exceeded (type 11, code 0)
 `ping -c 1 -t 1 h3` from h1: packet goes out with TTL=1, router receives it, sees TTL≤1, drops it and sends back "Time Exceeded". Visible in Wireshark: line 3 shows ICMP Echo request with TTL=1, line 4 shows Time-to-live exceeded response from 192.168.1.1 (router interface). Terminal h1 confirms: From 192.168.1.1 icmp_seq=1 Time to live exceeded
-![Third Scenario (first)](subiect3_1.png)
+![Third Scenario (first)](/assets/subiect3_1.png)
 - ICMP Destination Unreachable (type 3, code 0)
 `ping -c 1 10.0.0.1` from h1: address that does not exist in the routing table. Router does LPM lookup, finds no route and sends Destination Unreachable. Visible in Wireshark: line 1 shows Echo request to 10.0.0.1, line 2 shows Destination unreachable (Network unreachable) from 192.168.1.1. Terminal h1 confirms: Destination Net Unreachable.
-![Third Scenario (second)](subiect3_2.png)
+![Third Scenario (second)](/assets/subiect3_2.png)
 - ICMP Echo Reply (type 0, code 0)
 `ping 192.168.1.1` from h1: the router interface IP, so the packet is destined for the router itself. The router does not forward, but responds locally. Visible in Wireshark: request and reply alternate perfectly, TTL=64 on reply (set by router), id and seq kept identical. Terminal h1 confirms: 4 packets transmitted, 4 received, 0% packet loss
-![Third Scenario (third)](subiect3_3.png)
+![Third Scenario (third)](/assets/subiect3_3.png)
